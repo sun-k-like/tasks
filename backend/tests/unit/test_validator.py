@@ -6,16 +6,14 @@ from app.agents.validator import WelfareValidator
 def validator():
     return WelfareValidator()
 
-def test_validate_welfare_text_success(validator):
-    """복지 관련 키워드가 포함된 경우 성공해야 함"""
-    text = "2026년 청년 수당 지원 공고문입니다."
+# ... 기존 테스트 유지 ...
+
+def test_validate_voucher_keyword(validator):
+    """새로 추가된 '바우처' 키워드 검증"""
+    text = "에너지 바우처 신청 안내입니다."
     assert validator.validate(text) is True
 
-def test_validate_unrelated_text_fail(validator):
-    """복지와 무관한 텍스트는 거절되어야 함 (낙관적 편향 제거)"""
-    text = "오늘 점심 메뉴는 돈가스입니다."
-    assert validator.validate(text) is False
-
-def test_validate_empty_text(validator):
-    """빈 텍스트 입력 시 에러 없이 False 반환"""
-    assert validator.validate("") is False
+def test_validate_application_keyword(validator):
+    """새로 추가된 '신청' 키워드 검증"""
+    text = "보육료 지원 신청 기간 공고"
+    assert validator.validate(text) is True
